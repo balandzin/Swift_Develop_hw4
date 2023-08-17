@@ -11,7 +11,7 @@ import UIKit
 class GroupsViewController: UITableViewController {
     
     private var networkService = NetworkService()
-
+    private var models: [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,16 +20,33 @@ class GroupsViewController: UITableViewController {
         tableView.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barTintColor = .black
-        networkService.getGroups()
+        
+        tableView.register(GroupsCell.self, forCellReuseIdentifier: "GroupsCell")
+        
+        networkService.getGroups() { [ weak self ] groups in
+            self?.models = groups
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        models.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        GroupsCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath)
+        
+        let model = models[indexPath.row]
+        
+        guard let cell = cell as? GroupsCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setupTextGroups(group: model)
+        return cell
     }
-
     
 }
+

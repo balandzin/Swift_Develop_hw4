@@ -11,8 +11,7 @@ import UIKit
 class FriendsViewController: UITableViewController {
     
     private var networkService = NetworkService()
-    private var models: [FriendsModel] = []
-    
+    private var models: [Friend] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Friends"
@@ -22,7 +21,7 @@ class FriendsViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .white
         
         tableView.register(FriendsCell.self, forCellReuseIdentifier: "FriendsCell")
-        //networkService.delegate = self
+
         
         networkService.getFriends() { [ weak self ] friends in
             self?.models = friends
@@ -31,32 +30,14 @@ class FriendsViewController: UITableViewController {
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //FriendsCell()
     
-
-
         let cell = tableView.dequeueReusableCell(withIdentifier:
         "FriendsCell", for: indexPath)
 
@@ -68,16 +49,5 @@ class FriendsViewController: UITableViewController {
 
         cell.setupTextFriends(friend: model)
         return cell
-        
-        
-    }
-}
-
-extension FriendsViewController: NetworkServiceDelegate {
-    func updateTable(models: [FriendsModel]) {
-        self.models = models
-        DispatchQueue.main.async {
-            self.tableView.reloadData ()
-        }
     }
 }

@@ -23,11 +23,9 @@ final class FriendsCell: UITableViewCell {
         return label
     }()
     
-    func setupTextFriends(friend: FriendsModel) {
-        let name = friend.response.items
-        text.text = "\(name)"
+    func setupTextFriends(friend: Friend) {
+        text.text = friend.firstName ?? ""
     }
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

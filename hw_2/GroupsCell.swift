@@ -33,6 +33,10 @@ final class GroupsCell: UITableViewCell {
         return label
     }()
     
+    func setupTextGroups(group: Group) {
+        text1.text = group.name ?? ""
+        text2.text = group.description ?? ""
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,5 +78,11 @@ final class GroupsCell: UITableViewCell {
             text2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10)
             
         ])
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        text1.text = nil
+        text2.text = nil
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkServiceDelegate: AnyObject {
-    func updateTable(models: [FriendsModel])
+    func updateTable(models: [Friend])
 }
 
 final class NetworkService {
@@ -20,7 +20,7 @@ final class NetworkService {
     static var token = ""
     static var userID = ""
     
-    func getFriends(completion: @escaping ([FriendsModel]) -> Void ) {
+    func getFriends(completion: @escaping ([Friend]) -> Void ) {
         guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_50&access_token=\(NetworkService.token)&v=5.131") else {
             return
         }
@@ -30,9 +30,8 @@ final class NetworkService {
                 return
             }
             do {
-                 let friends = try JSONDecoder().decode([FriendsModel].self, from: data)
-                completion(friends)
-                //self.delegate?.updateTable(models: friends)
+                 let friends = try JSONDecoder().decode(FriendsModel.self, from: data)
+                completion(friends.response.items)
                 print(friends)
             } catch {
                 print(error)
@@ -40,7 +39,7 @@ final class NetworkService {
         }.resume()
     }
     
-    func getGroups() {
+    func getGroups(completion: @escaping ([Group]) -> Void ) {
         guard let url = URL(string: "https://api.vk.com/method/groups.get?access_token=\(NetworkService.token)&fields=description&v=5.131&extended=1") else {
             return
         }
@@ -51,7 +50,7 @@ final class NetworkService {
             }
             do {
                 let groups = try JSONDecoder().decode(GroupsModel.self, from: data)
-                print(groups)
+                completion(groups.response.items)
             } catch {
                 print(error)
             }
