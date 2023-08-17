@@ -61,7 +61,6 @@ final class GroupsCell: UITableViewCell {
         text1.translatesAutoresizingMaskIntoConstraints = false
         text2.translatesAutoresizingMaskIntoConstraints = false
 
-        
         NSLayoutConstraint.activate([
             circle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             circle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),

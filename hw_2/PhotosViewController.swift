@@ -11,7 +11,8 @@ import Foundation
 
 class PhotosViewController: UICollectionViewController {
     private var networkService = NetworkService()
-    
+    private var models: [Photo] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,7 @@ class PhotosViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        models.count
     }
     
     override func collectionView(_ collectionView:

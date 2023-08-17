@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         return webView
     }()
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -44,8 +43,7 @@ class ViewController: UIViewController {
         
         tabBarController.viewControllers = controllers
 //        navigationController?.pushViewController(tabBarController, animated: true)
-        
-        
+                
         guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let firstWindow = firstScene.windows.first else {
             return
@@ -53,7 +51,6 @@ class ViewController: UIViewController {
         
         firstWindow.rootViewController = tabBarController
     }
-    
 }
 
 extension ViewController: WKNavigationDelegate {

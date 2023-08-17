@@ -22,7 +22,6 @@ class FriendsViewController: UITableViewController {
         
         tableView.register(FriendsCell.self, forCellReuseIdentifier: "FriendsCell")
 
-        
         networkService.getFriends() { [ weak self ] friends in
             self?.models = friends
             DispatchQueue.main.async {
@@ -30,8 +29,7 @@ class FriendsViewController: UITableViewController {
             }
         }
     }
-     
-    
+         
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
     }
@@ -40,9 +38,7 @@ class FriendsViewController: UITableViewController {
     
         let cell = tableView.dequeueReusableCell(withIdentifier:
         "FriendsCell", for: indexPath)
-
         let model = models[indexPath.row]
-
         guard let cell = cell as? FriendsCell else {
         return UITableViewCell()
         }

@@ -18,7 +18,6 @@ final class FriendsCell: UITableViewCell {
     
     private var text: UILabel = {
         let label = UILabel()
-        //label.text = "Name"
         label.textColor = .black
         return label
     }()
@@ -47,7 +46,6 @@ final class FriendsCell: UITableViewCell {
         circle.translatesAutoresizingMaskIntoConstraints = false
         text.translatesAutoresizingMaskIntoConstraints = false
 
-        
         NSLayoutConstraint.activate([
             circle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             circle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -58,7 +56,6 @@ final class FriendsCell: UITableViewCell {
             text.leadingAnchor.constraint(equalTo: circle.trailingAnchor, constant: 30),
             text.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10),
             text.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30)
-            
         ])
     }
     
@@ -66,7 +63,5 @@ final class FriendsCell: UITableViewCell {
         super.prepareForReuse()
         text.text = nil
     }
-    
-    
 }
 

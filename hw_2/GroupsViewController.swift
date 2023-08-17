@@ -37,9 +37,7 @@ class GroupsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupsCell", for: indexPath)
-        
         let model = models[indexPath.row]
-        
         guard let cell = cell as? GroupsCell else {
             return UITableViewCell()
         }

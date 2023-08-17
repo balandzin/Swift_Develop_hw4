@@ -12,9 +12,7 @@ protocol NetworkServiceDelegate: AnyObject {
 }
 
 final class NetworkService {
-    
-    //weak var delegate: NetworkServiceDelegate?
-    
+        
     private let session = URLSession.shared
     
     static var token = ""
