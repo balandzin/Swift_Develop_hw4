@@ -55,7 +55,7 @@ final class NetworkService {
         }.resume()
     }
     
-    func getPhotos() {
+    func getPhotos(completion: @escaping ([Photo]) -> Void) {
         guard let url = URL(string: "https://api.vk.com/method/photos.get?fields=bdate&access_token=\(NetworkService.token)&v=5.131&album_id=profile") else {
             return
         }
@@ -66,6 +66,7 @@ final class NetworkService {
             }
             do {
                 let photos = try JSONDecoder().decode(PhotosModel.self, from: data)
+                completion(photos.response.items)
                 print(photos)
             } catch {
                 print(error)

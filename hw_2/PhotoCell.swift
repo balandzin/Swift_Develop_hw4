@@ -22,6 +22,18 @@ final class PhotoCell: UICollectionViewCell {
         
     }
     
+    func updateCell (model: Photo) {
+        DispatchQueue.global ().async {
+            if let url = URL(string: model.sizes.first?.url ?? ""), let data =
+                try? Data (contentsOf: url)
+            {
+                DispatchQueue.main.async {
+                    self.photoView.image = UIImage(data: data)
+                }
+            }
+        }
+    }
+    
     private func setupViews () {
         addSubview (photoView)
         setupConstraints ()
