@@ -9,12 +9,14 @@ import UIKit
 
 final class FriendsCell: UITableViewCell {
     
-    private var circle: UIImageView = {
-        let circle = UIImageView()
-        circle.backgroundColor = .green
-        circle.layer.cornerRadius = 25
-        return circle
-    }()
+    private var circle = UIImageView(image: UIImage(systemName: "person"))
+    
+//    private var circle: UIImageView = {
+//        let circle = UIImageView()
+//        circle.backgroundColor = .green
+//        circle.layer.cornerRadius = 25
+//        return circle
+//    }()
     
     private var text: UILabel = {
         let label = UILabel()
@@ -22,8 +24,35 @@ final class FriendsCell: UITableViewCell {
         return label
     }()
     
+    private var onlineCircle: UIView = {
+       let circle = UIView()
+        circle.backgroundColor = .gray
+        circle.layer.cornerRadius = 10
+        return circle
+    }()
+    
     func setupTextFriends(friend: Friend) {
-        text.text = friend.firstName ?? ""
+        text.text = (friend.firstName ?? "") + " " + (friend.lastName ?? "")
+        if let online = friend.online {
+            let isOnline = online == 1
+            if isOnline {
+                onlineCircle.backgroundColor = .green
+            } else {
+                onlineCircle.backgroundColor = .red
+            }
+        }
+        
+        DispatchQueue.global ().async {
+            if let url = URL (string: friend.photo ?? ""), let data = try?
+                    Data(contentsOf: url)
+            {
+                    DispatchQueue.main.async {
+                        self.circle.image = UIImage(data: data)
+                    }
+            }
+        }
+        
+        
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,18 +68,25 @@ final class FriendsCell: UITableViewCell {
     private func setupViews() {
         contentView.addSubview(circle)
         contentView.addSubview(text)
+        circle.addSubview(onlineCircle)
         setupConstraints()
     }
     
     private func setupConstraints() {
         circle.translatesAutoresizingMaskIntoConstraints = false
         text.translatesAutoresizingMaskIntoConstraints = false
+        onlineCircle.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             circle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             circle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             circle.heightAnchor.constraint(equalToConstant: 50),
             circle.widthAnchor.constraint(equalTo: circle.heightAnchor),
+            
+            onlineCircle.widthAnchor.constraint(equalToConstant: 20),
+            onlineCircle.heightAnchor.constraint(equalTo: onlineCircle.widthAnchor),
+            onlineCircle.bottomAnchor.constraint(equalTo: circle.bottomAnchor),
+            onlineCircle.trailingAnchor.constraint(equalTo: circle.trailingAnchor, constant: 10),
             
             text.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             text.leadingAnchor.constraint(equalTo: circle.trailingAnchor, constant: 30),
