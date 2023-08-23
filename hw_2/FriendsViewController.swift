@@ -19,6 +19,7 @@ class FriendsViewController: UITableViewController {
         tableView.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barTintColor = .white
+        navigationItem.rightBarButtonItem=UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(tap))
         
         tableView.register(FriendsCell.self, forCellReuseIdentifier: "FriendsCell")
 
@@ -29,6 +30,13 @@ class FriendsViewController: UITableViewController {
             }
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear (animated)
+        view.backgroundColor = Theme.currentTheme.backgroundColor
+        tableView.backgroundColor = Theme.currentTheme.backgroundColor
+        tableView.reloadData()
+    }
+    
          
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
@@ -36,14 +44,30 @@ class FriendsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        let cell = tableView.dequeueReusableCell(withIdentifier:
-        "FriendsCell", for: indexPath)
-        let model = models[indexPath.row]
-        guard let cell = cell as? FriendsCell else {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsCell else {
+            return UITableViewCell()
         }
-
-        cell.setupTextFriends(friend: model)
+        
+        let model = models[indexPath.row]
+        
+        cell.updateCell(model: model)
+        cell.tap = { [weak self] text, photo in
+            self?.navigationController?
+                .pushViewController(ProfileViewController(name: text, photo: photo, isUserProfile: false), animated: true)
+        }
         return cell
+    }
+}
+
+
+private extension FriendsViewController {
+    @objc func tap() {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction (name: .easeOut)
+        animation.type = .moveIn
+        animation.duration = 3
+        navigationController?.view.layer.add(animation, forKey: nil)
+        navigationController?
+            .pushViewController (ProfileViewController(isUserProfile: true), animated: false)
     }
 }

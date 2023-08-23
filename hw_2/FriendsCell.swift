@@ -9,14 +9,10 @@ import UIKit
 
 final class FriendsCell: UITableViewCell {
     
+    var tap: ((String?, UIImage?) -> Void)?
+    
     private var circle = UIImageView(image: UIImage(systemName: "person"))
     
-//    private var circle: UIImageView = {
-//        let circle = UIImageView()
-//        circle.backgroundColor = .green
-//        circle.layer.cornerRadius = 25
-//        return circle
-//    }()
     
     private var text: UILabel = {
         let label = UILabel()
@@ -25,7 +21,7 @@ final class FriendsCell: UITableViewCell {
     }()
     
     private var onlineCircle: UIView = {
-       let circle = UIView()
+        let circle = UIView()
         circle.backgroundColor = .gray
         circle.layer.cornerRadius = 10
         return circle
@@ -44,20 +40,43 @@ final class FriendsCell: UITableViewCell {
         
         DispatchQueue.global ().async {
             if let url = URL (string: friend.photo ?? ""), let data = try?
-                    Data(contentsOf: url)
+                Data(contentsOf: url)
             {
-                    DispatchQueue.main.async {
-                        self.circle.image = UIImage(data: data)
-                    }
+                DispatchQueue.main.async {
+                    self.circle.image = UIImage(data: data)
+                }
             }
         }
         
-        
     }
+    
+    func updateCell (model: Friend) {
+        text.text = (model.firstName ?? "") + " " + (model.lastName ?? "")
+        if let online = model.online {
+            let isOnline = online == 1
+            if isOnline {
+                onlineCircle.backgroundColor = .green
+            } else {
+                onlineCircle.backgroundColor = .red
+            }
+        }
+        DispatchQueue.global ().async {
+            if let url = URL(string: model.photo ?? ""), let data = try?
+                Data (contentsOf: url)
+            {
+                DispatchQueue.main.async {
+                    self.circle.image = UIImage (data: data)
+                }
+            }
+        }
+    }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector (cellClick))
+        addGestureRecognizer(recognizer)
         setupViews()
     }
     
@@ -76,7 +95,7 @@ final class FriendsCell: UITableViewCell {
         circle.translatesAutoresizingMaskIntoConstraints = false
         text.translatesAutoresizingMaskIntoConstraints = false
         onlineCircle.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             circle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             circle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -95,9 +114,13 @@ final class FriendsCell: UITableViewCell {
         ])
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        text.text = nil
+//        override func prepareForReuse() {
+//            super.prepareForReuse()
+//            text.text = nil
+//}
+        
+        @objc private func cellClick() {
+            tap?(text.text, circle.image)
     }
 }
 
