@@ -43,7 +43,6 @@ class ViewController: UIViewController {
         }
         
         tabBarController.viewControllers = controllers
-//        navigationController?.pushViewController(tabBarController, animated: true)
                 
         guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let firstWindow = firstScene.windows.first else {

@@ -23,6 +23,9 @@ final class NetworkService {
             return
         }
 
+        
+        
+        
         session.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
                 return

@@ -67,6 +67,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D31317BE2A9B84A000432407 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D31317362A86542900432407 /* Constants.swift */,
+				D3D97AEC2A852E7B00E4C5C3 /* FriendsModel.swift */,
+				D3D97B122A8545C600E4C5C3 /* GroupsModel.swift */,
+				D31317382A8A5CF000432407 /* PhotosModel.swift */,
+				D31317BC2A96840100432407 /* UserModel.swift */,
+				D31317BA2A9680B600432407 /* ThemeSaver.swift */,
+				D3D97AEA2A85265B00E4C5C3 /* NetworkService.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D31317BF2A9B84B000432407 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3B98FB82A8249360003B599 /* FriendsCell.swift */,
+				D3B98FC22A8268AD0003B599 /* GroupsCell.swift */,
+				D31317342A864B1300432407 /* PhotoCell.swift */,
+				D31317B82A96741D00432407 /* ThemeView.swift */,
+				D31317B62A96728300432407 /* Theme.swift */,
+				D3B98FAD2A8241E30003B599 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D31317C02A9B84C600432407 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D31317B42A966D2900432407 /* ProfileViewController.swift */,
+				D3B98FA62A8241E20003B599 /* ViewController.swift */,
+				D3B98FBE2A8255DA0003B599 /* FriendsViewController.swift */,
+				D3B98FC02A8255F50003B599 /* GroupsViewController.swift */,
+				D3B98FBA2A8251060003B599 /* PhotosViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		D3B98F962A8241E20003B599 = {
 			isa = PBXGroup;
 			children = (
@@ -86,28 +125,13 @@
 		D3B98FA12A8241E20003B599 /* hw_2 */ = {
 			isa = PBXGroup;
 			children = (
+				D31317C02A9B84C600432407 /* Controllers */,
+				D31317BF2A9B84B000432407 /* Views */,
+				D31317BE2A9B84A000432407 /* Models */,
 				D31317322A863EA800432407 /* AppDelegate.swift */,
 				D3B98FA42A8241E20003B599 /* SceneDelegate.swift */,
-				D3B98FA62A8241E20003B599 /* ViewController.swift */,
 				D3B98FAB2A8241E30003B599 /* Assets.xcassets */,
-				D3B98FAD2A8241E30003B599 /* LaunchScreen.storyboard */,
 				D3B98FB02A8241E30003B599 /* Info.plist */,
-				D3B98FBE2A8255DA0003B599 /* FriendsViewController.swift */,
-				D3B98FC02A8255F50003B599 /* GroupsViewController.swift */,
-				D3B98FBA2A8251060003B599 /* PhotosViewController.swift */,
-				D3B98FB82A8249360003B599 /* FriendsCell.swift */,
-				D3B98FC22A8268AD0003B599 /* GroupsCell.swift */,
-				D31317342A864B1300432407 /* PhotoCell.swift */,
-				D31317B42A966D2900432407 /* ProfileViewController.swift */,
-				D3D97AEA2A85265B00E4C5C3 /* NetworkService.swift */,
-				D3D97AEC2A852E7B00E4C5C3 /* FriendsModel.swift */,
-				D3D97B122A8545C600E4C5C3 /* GroupsModel.swift */,
-				D31317382A8A5CF000432407 /* PhotosModel.swift */,
-				D31317BC2A96840100432407 /* UserModel.swift */,
-				D31317362A86542900432407 /* Constants.swift */,
-				D31317B62A96728300432407 /* Theme.swift */,
-				D31317B82A96741D00432407 /* ThemeView.swift */,
-				D31317BA2A9680B600432407 /* ThemeSaver.swift */,
 			);
 			path = hw_2;
 			sourceTree = "<group>";
