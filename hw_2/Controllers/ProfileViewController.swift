@@ -97,11 +97,7 @@ final class ProfileViewController: UIViewController {
             ])
         }
 }
-    
-    
-    
-    
-    
+      
 extension ProfileViewController: ThemeViewDelegate {
     func updateColor() {
         view.backgroundColor = Theme.currentTheme.backgroundColor
